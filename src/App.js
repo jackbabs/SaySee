@@ -33,7 +33,7 @@ class App extends Component {
       stream.on('data', (data) => {
         this.setState({
           search: data.alternatives[0].transcript,
-        })
+        }, this.videoSearch(this.state.search))
       });
       stream.on('error', function(err) {
           console.log(err);
@@ -55,8 +55,9 @@ class App extends Component {
   }
   
   render() {
-    const search = this.state.search
-    _.debounce((search) => { this.videoSearch(search)}, 300)
+    // const search = this.state.search
+    // _.debounce((search) => { this.videoSearch(search)}, 300)
+    // this.videoSearch
     return (
       <div className="App">
         <div className="container-listen-button">
