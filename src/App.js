@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
+import _ from 'lodash'
 import './style/style.css'
 import SearchBar from './components/search-bar'
 import VideoViewer from './components/video-viewer'
+import VideoList from './components/video-list'
 import recognizeMic from 'watson-speech/speech-to-text/recognize-microphone'
-
+import YTSearch from 'youtube-api-search'
 const API_KEY = 'AIzaSyC8VbL5xwHclL4HkCui8yF6-uMWyAW6HKc'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      search: ""
+      search: "",
+      videos: [],
+      selectedVideo: null,
     }
     this.videoSearch('space trip')
   }
@@ -51,6 +55,8 @@ class App extends Component {
   }
   
   render() {
+    const search = this.state.search
+    _.debounce((search) => { this.videoSearch(search)}, 300)
     return (
       <div className="App">
         <div className="container-listen-button">
@@ -64,7 +70,13 @@ class App extends Component {
         <SearchBar
           search={this.state.search}
         />
-        <VideoViewer/>
+        <VideoViewer
+          video={this.state.selectedVideo}
+        />
+        <VideoList
+          videos={this.state.videos}
+          onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
+        />
       </div>
      
     );
