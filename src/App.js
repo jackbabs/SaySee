@@ -15,7 +15,11 @@ class App extends Component {
       search: "",
       videos: [],
       selectedVideo: null,
+      videoPlaying: false,
     }
+    this.onVideoPlay = this.onVideoPlay.bind(this)
+    this.videoSearch = this.videoSearch.bind(this)
+    this.onVideoPause = this.onVideoPause.bind(this)
     this.videoSearch('space trip')
   }
   onListenClick(){
@@ -28,20 +32,23 @@ class App extends Component {
           token: token,
           objectMode: true, // send objects instead of text
           extractResults: true, // convert {results: [{alternatives:[...]}], result_index: 0} to {alternatives: [...], index: 0}
-          format: false // optional - performs basic formatting on the results such as capitals an periods
+          format: false, // optional - performs basic formatting on the results such as capitals an periods
       });
       stream.on('data', (data) => {
-        this.setState({
-          search: data.alternatives[0].transcript,
-        }, this.videoSearch(this.state.search))
+        if(!this.state.videoPlaying){
+          this.setState({
+            search: data.alternatives[0].transcript,
+          }, this.videoSearch(this.state.search))
+        }
+        });
+    
+        stream.on('error', function(err) {
+            console.log(err);
+        });
+      //  stream.stop()
+      }).catch(function(error) {
+          console.log(error);
       });
-      stream.on('error', function(err) {
-          console.log(err);
-      });
-      // document.querySelector('#stop').onclick = stream.stop.bind(stream);
-    }).catch(function(error) {
-        console.log(error);
-    });
   };
 
   videoSearch(term){
@@ -51,8 +58,18 @@ class App extends Component {
         selectedVideo: videos[0]
 ,      })
     })
-
   }
+
+  onVideoPlay(){
+    console.log(this.state.videoPlaying)
+    this.setState({ videoPlaying: true }, this.onListenClick())
+    console.log(this.state.videoPlaying)
+  }
+
+  onVideoPause(){
+    this.setState({ videoPlaying: false })
+  }
+
   
   render() {
     // const search = this.state.search
@@ -73,6 +90,8 @@ class App extends Component {
         />
         <VideoViewer
           video={this.state.selectedVideo}
+          onVideoPlay={this.onVideoPlay}
+          onVideoPause={this.onVideoPause}
         />
         <VideoList
           videos={this.state.videos}
