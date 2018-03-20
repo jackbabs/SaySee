@@ -1,0 +1,61 @@
+.header-title{
+  color: white;
+  font-family: 'Timmana', sans-serif;
+  font-size: 130px;
+  text-shadow: 3px 3px 5px #002754;
+}
+
+.header-subtitle{
+  margin-top: 0;
+  color: lightgray;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.main-button{
+	text-decoration:none;
+	color:white;
+	font-size:25px;
+	font-weight:bold;
+	padding:20px 30px;
+	line-height:32px;
+	height: auto;
+	display:inline-block;
+	text-align:center;
+  background-color:#33ABF3;
+  border-radius: 50px;
+  border: 0px;
+  margin-top: 30px;
+  box-shadow: 2px 2px 5px #002754;
+}
+
+.main-button:hover{
+  background-color:#7dbde8;
+  cursor: pointer;
+}
+
+.speedy{
+  font-size: 25px;
+  font-style: italic;
+ 
+}
+
+.speech{
+  font-size: 30px;
+  font-style: italic;
+  color: #66DEFF;
+}
+
+.search{
+  font-size: 27px;
+  font-style: italic;
+  color: lightgray;
+}
+
+.logo-icon{
+  height: 40px;
+  width: 40px;
+  background-color: #33ABF3;
+  border-radius: 100%;
+  border: 1px solid black;
+}
