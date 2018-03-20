@@ -25,7 +25,7 @@ class App extends Component {
   onListenClick(){
     // fetch('https://..../api/speech-to-text/token')
     // fetch('http://localhost:3002/api/speech-to-text/token')
-    fetch('https://sayseevoiceapp.eu-gb.mybluemix.net/')
+    fetch('https://sayseevoiceapp.eu-gb.mybluemix.net/api/speech-to-text/token')
     .then(function(response) {
         return response.text();
     }).then((token) => {
