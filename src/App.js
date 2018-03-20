@@ -23,7 +23,9 @@ class App extends Component {
     this.videoSearch('space trip')
   }
   onListenClick(){
-    fetch('http://localhost:3002/api/speech-to-text/token')
+    // fetch('https://..../api/speech-to-text/token')
+    // fetch('http://localhost:3002/api/speech-to-text/token')
+    fetch('https://sayseevoiceapp.eu-gb.mybluemix.net/')
     .then(function(response) {
         return response.text();
     }).then((token) => {
