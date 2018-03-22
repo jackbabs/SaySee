@@ -16,6 +16,7 @@ class App extends Component {
       videos: [],
       selectedVideo: null,
       videoPlaying: false,
+      listening: false,
     }
     this.onVideoPlay = this.onVideoPlay.bind(this)
     this.videoSearch = this.videoSearch.bind(this)
@@ -23,7 +24,9 @@ class App extends Component {
     this.videoSearch('space trip')
   }
   onListenClick(){
-    // fetch('https://..../api/speech-to-text/token')
+    if(!this.state.videoPlaying){
+      this.setState({ listening: true })
+    }
     // fetch('http://localhost:3002/api/speech-to-text/token')
     fetch('https://sayseeserver-boisterous-raven.eu-gb.mybluemix.net/api/speech-to-text/token')
     .then(function(response) {
@@ -55,6 +58,7 @@ class App extends Component {
 
   videoSearch(term){
     YTSearch({key: API_KEY, term: term}, (videos) => {
+      console.log(videos[0])
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
@@ -63,9 +67,7 @@ class App extends Component {
   }
 
   onVideoPlay(){
-    console.log(this.state.videoPlaying)
     this.setState({ videoPlaying: true }, this.onListenClick())
-    console.log(this.state.videoPlaying)
   }
 
   onVideoPause(){
@@ -82,23 +84,30 @@ class App extends Component {
         <div className="container-listen-button">
           <button 
             onClick={this.onListenClick.bind(this)}
-            className="listen-button"
+            className={this.state.listening && !this.state.videoPlaying ? "listening listen-button" : "listen-button"}
           >
-          Listen to microphone
+          <i className="fa fa-commenting listen-button-icon"></i>
           </button>
-          </div>
+        </div>
         <SearchBar
           search={this.state.search}
         />
+        <div className="container col-md-8">
+          <div className="row">
         <VideoViewer
           video={this.state.selectedVideo}
           onVideoPlay={this.onVideoPlay}
           onVideoPause={this.onVideoPause}
         />
+        <div className="col-md-1">
+        </div>
         <VideoList
           videos={this.state.videos}
+          selectedVideo={this.state.selectedVideo}
           onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
         />
+        </div>
+        </div>
       </div>
      
     );

@@ -35,20 +35,40 @@
                     <span class="navbar-toggler-bar"></span>
                     <span class="navbar-toggler-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><div className="logo-icon"><i class="fa fa-commenting"></i></div></a>
+               
             </div>
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="Star on GitHub" data-placement="bottom" href="https://www.github.com/CreativeTimOfficial/paper-kit" target="_blank">
-                            <i class="fa fa-github"></i>
-                            <p class="d-lg-none">GitHub</p>
+                        <a class="nav-link" rel="tooltip" title="How to use SaySee" data-placement="bottom" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer; opacity: 1">
+                            <img src="./images/help.png" height="50px"/>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <!-- Help Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle" style="color: #33ABF3; font-weight: bold">How to use SaySee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Click the icon that looks like this 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #33ABF3">Got it!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     <div class="wrapper">
         <div class="page-header section-dark" style="background-image: url('./images/background-image.jpg')">
             <div class="filter"></div>
@@ -66,8 +86,6 @@
         <div class="main">
             <div class="section text-center">
 
-              <p>Your content here...</p>
-              <button id="stop">Stop</button>
 
             </div>
             <div id="root"></div>
@@ -112,6 +130,14 @@
 
 <!--  Paper Kit Initialization and functons -->
 <script src="https://cdn.rawgit.com/creativetimofficial/paper-kit/bootstrap4-development/assets/js/paper-kit.js"></script>
+
+<script>
+    $(".main-button").click(function(){
+        $("html,body").animate({
+            scrollTop: $(".main").offset().top}, 
+            1000)
+        })
+</script>
 
 </html>
 

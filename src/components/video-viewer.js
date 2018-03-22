@@ -23,6 +23,7 @@ class VideoViewer extends React.Component {
     }
     return (
       <div className="video-viewer col-md-6">
+      <div className="text-center">
         <Youtube
           videoId={videoId}
           opts={opts}
@@ -30,9 +31,11 @@ class VideoViewer extends React.Component {
           onPause={this.onVideoPause.bind(this)}
   
         />
+        </div>
         <div className="details">
-          <div>{ video.snippet.title }</div>
+          <div className="details-title">{ video.snippet.title }</div>
           <div>{ video.snippet.description }</div>
+        
         </div>
       </div>
     )
