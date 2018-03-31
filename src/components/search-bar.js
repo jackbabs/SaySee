@@ -14,7 +14,6 @@ class SearchBar extends Component {
       <div className="search-bar">
         <input
           value={this.props.search}
-          
         />
       </div>
     )
