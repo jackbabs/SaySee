@@ -55,6 +55,7 @@ class App extends Component {
       });
     } else {
       this.stream.stop()
+      this.setState({ listening: false })
     }
   };
 
