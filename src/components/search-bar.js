@@ -9,7 +9,6 @@ class SearchBar extends Component {
     }
   }
   render(){
-    console.log(this.props.search)
     return (
       <div className="search-bar">
         <input

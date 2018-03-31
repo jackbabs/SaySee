@@ -23,6 +23,7 @@ class App extends Component {
     this.onVideoPause = this.onVideoPause.bind(this)
     this.videoSearch('space trip')
   }
+
   onListenClick(){
 
     if(!this.state.videoPlaying){
@@ -60,15 +61,17 @@ class App extends Component {
   };
 
   streamUpdate(search){
+    console.log(this.state.videoPlaying)
     if(this.state.videoPlaying){
       this.stream.stop()
+      this.setState({ search: "" })
     }
+    console.log(this.state.search)
     this.videoSearch(search)
   }
 
   videoSearch(term){
     YTSearch({key: API_KEY, term: term}, (videos) => {
-      console.log(videos[0])
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
@@ -77,7 +80,8 @@ class App extends Component {
   }
 
   onVideoPlay(){
-    this.setState({ videoPlaying: true })
+    this.setState({ videoPlaying: true, listening: false })
+    this.stream.stop()
   }
 
   onVideoPause(){
