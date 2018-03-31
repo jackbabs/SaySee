@@ -24,36 +24,38 @@ class App extends Component {
     this.videoSearch('space trip')
   }
   onListenClick(){
+
     if(!this.state.videoPlaying){
       this.setState({ listening: true })
-    }
+    
     // fetch('http://localhost:3002/api/speech-to-text/token')
     fetch('https://sayseeserver-boisterous-raven.eu-gb.mybluemix.net/api/speech-to-text/token')
     .then(function(response) {
         return response.text();
     }).then((token) => {
       console.log('token is', token)
-      var stream = recognizeMic({
+      this.stream = recognizeMic({
           token: token,
           objectMode: true, // send objects instead of text
           extractResults: true, // convert {results: [{alternatives:[...]}], result_index: 0} to {alternatives: [...], index: 0}
           format: false, // optional - performs basic formatting on the results such as capitals an periods
       });
-      stream.on('data', (data) => {
-        if(!this.state.videoPlaying){
+      this.stream.on('data', (data) => {
           this.setState({
             search: data.alternatives[0].transcript,
           }, this.videoSearch(this.state.search))
-        }
         });
     
-        stream.on('error', function(err) {
+        this.stream.on('error', function(err) {
             console.log(err);
         });
       //  stream.stop()
       }).catch(function(error) {
           console.log(error);
       });
+    } else {
+      this.stream.stop()
+    }
   };
 
   videoSearch(term){
