@@ -43,7 +43,7 @@ class App extends Component {
       this.stream.on('data', (data) => {
           this.setState({
             search: data.alternatives[0].transcript,
-          }, this.videoSearch(this.state.search))
+          }, this.streamUpdate(this.state.search))
         });
     
         this.stream.on('error', function(err) {
@@ -59,6 +59,13 @@ class App extends Component {
     }
   };
 
+  streamUpdate(search){
+    if(this.state.videoPlaying){
+      this.stream.stop()
+    }
+    this.videoSearch(search)
+  }
+
   videoSearch(term){
     YTSearch({key: API_KEY, term: term}, (videos) => {
       console.log(videos[0])
@@ -70,7 +77,7 @@ class App extends Component {
   }
 
   onVideoPlay(){
-    this.setState({ videoPlaying: true }, this.onListenClick())
+    this.setState({ videoPlaying: true })
   }
 
   onVideoPause(){
