@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash'
 import './style/style.css'
 import SearchBar from './components/search-bar'
 import VideoViewer from './components/video-viewer'
@@ -61,12 +60,10 @@ class App extends Component {
   };
 
   streamUpdate(search){
-    console.log(this.state.videoPlaying)
     if(this.state.videoPlaying){
       this.stream.stop()
       this.setState({ search: "" })
     }
-    console.log(this.state.search)
     this.videoSearch(search)
   }
 

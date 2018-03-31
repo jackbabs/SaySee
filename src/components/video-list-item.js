@@ -5,10 +5,10 @@ const VideoListItem = ({ video, onVideoSelect, selectedVideo }) => {
   const imageUrl = video.snippet.thumbnails.default.url
 
   return (
-    <li onClick={()=> onVideoSelect(video)} className={selectedVideo == video ? "list-group-item selected" : "list-group-item" }>
+    <li onClick={() => onVideoSelect(video)} className={selectedVideo === video ? "list-group-item selected" : "list-group-item" }>
       <div className="video-list media">
         <div className="media-left">
-          <img className="media-object" src={imageUrl} />
+          <img alt="video" className="media-object" src={imageUrl} />
         </div>
 
         <div className="media-body">
